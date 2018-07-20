@@ -22,7 +22,7 @@ package body Base is
    begin
       declare
          --  compute the required size of the Buf buffer
-         Size : constant Integer := (S'Size)  * 138 / 100 + 1;
+         Size : constant Integer := S'Length * 138 / 100 + 1;
          --  the Buf buffer is a Base58 number with a digit per cell,
          --  but represented using numbers 0 to 57 instead of the actual
          --  characters.
