@@ -44,7 +44,8 @@ package body Base with SPARK_Mode is
          for I in S'Range loop
             J := Size;
             Carry := Character'Pos(S (I));
-            while Carry /= 0 loop
+            while J in Buf'Range and then Carry /= 0 loop
+               pragma Loop_Invariant (Carry in 0 .. 255);
                Carry := Carry + 256 * Buf (J);
                Buf (J) := Carry rem 58;
                Carry := Carry / 58;
@@ -52,9 +53,9 @@ package body Base with SPARK_Mode is
             end loop;
          end loop;
          declare
-            Result : Number (1 .. Buf'Length);
+            Result : Number (1 .. Size);
          begin
-            for I in Buf'Range loop
+            for I in Result'Range loop
                Result (I) := Alphabet (Buf (I));
             end loop;
             return Result;
