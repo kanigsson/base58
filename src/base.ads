@@ -1,4 +1,4 @@
-package Base is
+package Base with SPARK_Mode is
 
    type Number is array (Positive range <>) of Character;
 

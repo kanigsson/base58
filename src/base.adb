@@ -1,4 +1,4 @@
-package body Base is
+package body Base with SPARK_Mode is
 
    subtype Base58Digit is Integer range 0 .. 57;
    type Alpha_Type is array (Base58Digit) of Character;
