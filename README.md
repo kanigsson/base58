@@ -3,6 +3,10 @@
 The code has been tested very little. However, it has been proved free of
 runtime errors using SPARK.
 
+The code has been heavily inspired from the
+[libbase58](https://github.com/luke-jr/libbase58) library. See also the
+`COPYING_ORIGINAL` file.
+
 
 ## Requirements
 
