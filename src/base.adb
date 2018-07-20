@@ -30,6 +30,8 @@ package body Base with SPARK_Mode is
          type Base58Number is array (1 .. Size) of Base58Digit;
 
          Buf : Base58Number := (others => 0);
+
+         High : Integer := Size;
       begin
          --  Buf contains the current encoded number. We now process each input
          --  character one by one. Basically, what we do for each digit is to
@@ -44,13 +46,14 @@ package body Base with SPARK_Mode is
          for I in S'Range loop
             J := Size;
             Carry := Character'Pos(S (I));
-            while J in Buf'Range and then Carry /= 0 loop
+            while J in Buf'Range and then (Carry /= 0 or else J > High) loop
                pragma Loop_Invariant (Carry in 0 .. 255);
                Carry := Carry + 256 * Buf (J);
                Buf (J) := Carry rem 58;
                Carry := Carry / 58;
                J := J - 1;
             end loop;
+            High := J;
          end loop;
          declare
             Result : Number (1 .. Size);
